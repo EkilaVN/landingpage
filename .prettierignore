@@ -1,0 +1,8 @@
+README.md
+src/styles/globals.css
+
+node_modules
+.next
+build
+dist
+public

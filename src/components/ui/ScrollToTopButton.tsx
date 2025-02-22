@@ -18,6 +18,12 @@ const ScrollToTopButton = () => {
     }
   };
 
+  const scrollToTop = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -31,13 +37,12 @@ const ScrollToTopButton = () => {
       animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 50 }}
       className="fixed bottom-6 right-5 z-50 flex flex-col items-center justify-center gap-2 text-textColor"
     >
-      <motion.a
-        // onClick={scrollToTop}
-        href="#"
+      <motion.button
+        onClick={scrollToTop}
         className="rotate-[0deg] cursor-pointer text-sm tracking-widest text-textColor [writing-mode:vertical-rl]"
       >
         TO TOP
-      </motion.a>
+      </motion.button>
       <div className="relative flex h-[100px] w-[1px] flex-col overflow-hidden bg-gray-300 dark:bg-gray-500">
         <motion.div
           className="absolute -top-0 w-[1px] bg-textColor"

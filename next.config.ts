@@ -7,6 +7,18 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "marketifythemes.net",
       },
+      {
+        protocol: "https",
+        hostname: "flowbite.s3.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "smomedia.vn",
+      },
+      {
+        protocol: "https",
+        hostname: "assets.aceternity.com",
+      },
     ],
   },
 };

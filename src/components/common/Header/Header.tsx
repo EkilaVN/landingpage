@@ -125,7 +125,7 @@ const Header = () => {
               <li>
                 <div
                   onClick={handleChangeTheme}
-                  className="flex cursor-pointer items-center rounded-3xl px-[2px] py-[2px]"
+                  className="flex transform cursor-pointer items-center rounded-lg p-[6px] duration-200 hover:bg-[#f0f0f068] dark:hover:bg-[#3a3b3f5a]"
                 >
                   {theme === "dark" ? (
                     <Image src={Moon} width={20} height={20} alt={""} />

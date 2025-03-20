@@ -54,7 +54,7 @@ const Footer = () => (
               <Image
                 src={FacebookIcon}
                 alt=""
-                className="hover:animate-wobble invert-0 dark:invert"
+                className="invert-0 hover:animate-wobble dark:invert"
               />
             </a>
             <a
@@ -62,21 +62,21 @@ const Footer = () => (
               target="_blank"
               className="text-textColor transition-colors duration-300 hover:text-textMain"
             >
-              <Image src={Instagram} alt="" className="hover:animate-wobble invert-0 dark:invert" />
+              <Image src={Instagram} alt="" className="invert-0 hover:animate-wobble dark:invert" />
             </a>
             <a
               href="https://www.facebook.com/tanvinh.huynh.9999/"
               target="_blank"
               className="text-textColor transition-colors duration-300 hover:text-textMain"
             >
-              <Image src={Linkedin} alt="" className="hover:animate-wobble invert-0 dark:invert" />
+              <Image src={Linkedin} alt="" className="invert-0 hover:animate-wobble dark:invert" />
             </a>
             <a
               href="https://www.facebook.com/tanvinh.huynh.9999/"
               target="_blank"
               className="text-textColor transition-colors duration-300 hover:text-textMain"
             >
-              <Image src={Github} alt="" className="hover:animate-wobble invert-0 dark:invert" />
+              <Image src={Github} alt="" className="invert-0 hover:animate-wobble dark:invert" />
             </a>
           </div>
         </div>

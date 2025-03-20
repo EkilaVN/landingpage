@@ -73,11 +73,42 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        wobble: {
+          from: {
+            transform: "translate3d(0, 0, 0)",
+          },
+
+          "15%": {
+            transform: "translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg)",
+          },
+
+          "30%": {
+            transform: "translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg)",
+          },
+
+          "45%": {
+            transform: "translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg)",
+          },
+
+          "60%": {
+            transform: "translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg)",
+          },
+
+          "75%": {
+            transform: "translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg)",
+          },
+
+          to: {
+            transform: "translate3d(0, 0, 0)",
+          },
+        },
       },
       animation: {
         ripple: "ripple 0.5s linear forwards",
         bounce: "bounce 3s linear infinite",
+        wobble: "wobble 0.8s ease-in-out",
       },
+
       backgroundImage: {
         "radial-fade": "radial-gradient(circle, rgba(107,114,128,1) 0%, rgba(107,114,128,0) 70%)",
       },

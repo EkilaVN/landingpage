@@ -1,6 +1,10 @@
 import Image from "next/image";
 import QRCode from "@/assets/images/qrfb.png";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+import FacebookIcon from "@/assets/svgs/facebook.svg";
+import Instagram from "@/assets/svgs/instagram.svg";
+import Linkedin from "@/assets/svgs/linkedin.svg";
+import Github from "@/assets/svgs/github.svg";
 
 const Footer = () => (
   <BackgroundBeamsWithCollision className="z-0 flex min-h-[480px] w-full items-center justify-center py-6">
@@ -47,28 +51,32 @@ const Footer = () => (
               target="_blank"
               className="text-textColor transition-colors duration-300 hover:text-textMain"
             >
-              {/* <FontAwesomeIcon icon={faFacebook} className="hover:color-[#f75023] text-3xl" /> */}
+              <Image
+                src={FacebookIcon}
+                alt=""
+                className="invert-0 hover:animate-wobble dark:invert"
+              />
             </a>
             <a
               href="https://www.facebook.com/tanvinh.huynh.9999/"
               target="_blank"
               className="text-textColor transition-colors duration-300 hover:text-textMain"
             >
-              {/* <FontAwesomeIcon icon={faInstagram} className="hover:color-[#f75023] text-3xl" /> */}
+              <Image src={Instagram} alt="" className="invert-0 hover:animate-wobble dark:invert" />
             </a>
             <a
               href="https://www.facebook.com/tanvinh.huynh.9999/"
               target="_blank"
               className="text-textColor transition-colors duration-300 hover:text-textMain"
             >
-              {/* <FontAwesomeIcon icon={faLinkedin} className="hover:color-[#f75023] text-3xl" /> */}
+              <Image src={Linkedin} alt="" className="invert-0 hover:animate-wobble dark:invert" />
             </a>
             <a
               href="https://www.facebook.com/tanvinh.huynh.9999/"
               target="_blank"
               className="text-textColor transition-colors duration-300 hover:text-textMain"
             >
-              {/* <FontAwesomeIcon icon={faGithub} className="hover:color-[#f75023] text-3xl" /> */}
+              <Image src={Github} alt="" className="invert-0 hover:animate-wobble dark:invert" />
             </a>
           </div>
         </div>

@@ -12,7 +12,7 @@ const ContactMeDecor = () => {
       variants={fadeInAnimationVariants}
       initial="initial"
       whileInView="animate"
-      viewport={{ once: true }}
+      viewport={{ once: false }}
     />
   );
 };

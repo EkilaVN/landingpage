@@ -2,10 +2,13 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import MyServiceDecor from "./MyServiceDecor";
 import TitleSection from "@/components/common/TitleSection";
 import Image from "next/image";
+import ContactMeDecor from "../ContactMe/ContactMeDecor";
 
 const MyServices = () => (
   <div className="relative mb-20 flex w-full justify-center lg:w-[100vw]">
     <MyServiceDecor />
+    <ContactMeDecor />
+
     <div className="relative my-20 flex w-full flex-col px-4 md:px-10 lg:max-w-[1170px] 2xl:max-w-[1420px]">
       <div className="flex w-full justify-center">
         <TitleSection

@@ -3,7 +3,7 @@ export const fadeInAnimationVariants = {
   animate: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 2, ease: "easeOut", delay: 0.5 },
+    transition: { duration: 1, ease: "easeOut", delay: 0.2 },
   },
 };
 
@@ -13,7 +13,7 @@ export const fadeLeftAnimationVariants = {
     opacity: 1,
     scale: 1,
     x: 0,
-    transition: { duration: 1, ease: "easeOut", delay: 0.5 },
+    transition: { duration: 1, ease: "easeOut", delay: 0.2 },
   },
 };
 
@@ -23,6 +23,6 @@ export const fadeRightAnimationVariants = {
     opacity: 1,
     scale: 1,
     x: 0,
-    transition: { duration: 1, ease: "easeOut", delay: 0.5 },
+    transition: { duration: 1, ease: "easeOut", delay: 0.2 },
   },
 };

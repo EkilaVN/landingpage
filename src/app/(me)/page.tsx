@@ -1,3 +1,4 @@
+import SplashCursor from "@/components/ui/SplashCursor";
 import CommitInfo from "@/views/Home/CommitInfo/CommitInfo";
 import ContactMe from "@/views/Home/ContactMe/ContactMe";
 import HeaderHome from "@/views/Home/HeaderHome/HeaderHome";
@@ -11,6 +12,7 @@ import Testimonials from "@/views/Home/Testimonials/Testimonials";
 export default function Home() {
   return (
     <div className="flex w-full flex-col items-center justify-center">
+      <SplashCursor />
       <HeaderHome />
       <div className="relative flex w-full flex-col items-center justify-evenly px-5 md:px-7 lg:max-w-[1170px] lg:px-10 2xl:max-w-[1420px]">
         <CommitInfo />

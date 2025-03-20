@@ -14,7 +14,7 @@ const PortfolioDecor = () => {
         variants={fadeInAnimationVariants}
         initial="initial"
         whileInView="animate"
-        viewport={{ once: true }}
+        viewport={{ once: false }}
       />
       <motion.img
         src={Deco4.src}
@@ -23,7 +23,7 @@ const PortfolioDecor = () => {
         variants={fadeRightAnimationVariants}
         initial="initial"
         whileInView="animate"
-        viewport={{ once: true }}
+        viewport={{ once: false }}
       />
     </>
   );

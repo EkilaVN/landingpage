@@ -12,7 +12,7 @@ const HighlightDecor = () => {
         variants={fadeRightAnimationVariants}
         initial="initial"
         whileInView="animate"
-        viewport={{ once: true }}
+        viewport={{ once: false }}
       />
       <motion.img
         src="https://marketifythemes.net/html/dizme/img/brushes/news/1.png"
@@ -21,7 +21,7 @@ const HighlightDecor = () => {
         variants={fadeInAnimationVariants}
         initial="initial"
         whileInView="animate"
-        viewport={{ once: true }}
+        viewport={{ once: false }}
       />
     </>
   );

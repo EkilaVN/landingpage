@@ -14,7 +14,7 @@ const MotionDecor = () => (
       variants={fadeInAnimationVariants}
       initial="initial"
       whileInView="animate"
-      viewport={{ once: true }}
+      viewport={{ once: false }}
     />
     <motion.img
       src={Decor2Src.src}
@@ -23,7 +23,7 @@ const MotionDecor = () => (
       variants={fadeInAnimationVariants}
       initial="initial"
       whileInView="animate"
-      viewport={{ once: true }}
+      viewport={{ once: false }}
     />
   </>
 );

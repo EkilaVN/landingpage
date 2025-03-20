@@ -12,7 +12,7 @@ const TestimonialsDecor = () => {
       variants={fadeRightAnimationVariants}
       initial="initial"
       whileInView="animate"
-      viewport={{ once: true }}
+      viewport={{ once: false }}
     />
   );
 };

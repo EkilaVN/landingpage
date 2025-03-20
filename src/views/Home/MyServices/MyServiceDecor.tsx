@@ -10,20 +10,20 @@ const MyServiceDecor = () => {
       <motion.img
         src={Deco5.src}
         alt=""
-        className="absolute -top-36 right-0 -z-10"
+        className="absolute -top-36 right-0 z-0"
         variants={fadeRightAnimationVariants}
         initial="initial"
         whileInView="animate"
-        viewport={{ once: true }}
+        viewport={{ once: false }}
       />
       <motion.img
         src={Deco6.src}
         alt=""
-        className="absolute -left-24 top-52 z-[-1]"
+        className="absolute -left-24 top-52 z-0"
         variants={fadeLeftAnimationVariants}
         initial="initial"
         whileInView="animate"
-        viewport={{ once: true }}
+        viewport={{ once: false }}
       />
     </>
   );

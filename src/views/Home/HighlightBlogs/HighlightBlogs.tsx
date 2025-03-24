@@ -146,15 +146,12 @@ const data = [
     ),
   },
 ];
-
 const HighlightBlogs = () => {
   return (
     <div className="relative my-10 flex justify-center lg:w-[100vw]">
       <HighlightDecor />
-      <div className="relative flex w-full flex-col px-4 lg:max-w-[1170px] lg:px-10 2xl:max-w-[1420px]">
-        <div className="z-10 my-20 flex w-full flex-col items-center">
-          <Timeline data={data} />
-        </div>
+      <div className="relative z-10 my-20 flex w-full flex-col items-center px-4 lg:max-w-[1170px] lg:px-10 2xl:max-w-[1420px]">
+        <Timeline data={data} />
       </div>
     </div>
   );

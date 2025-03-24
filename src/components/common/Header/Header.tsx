@@ -92,7 +92,8 @@ const Header = () => {
           alt="Logo"
           width={150}
           height={80}
-          className="max-h-10 max-w-24 lg:max-h-[80px] lg:max-w-[150px]"
+          priority
+          className="h-auto w-auto"
         />
 
         {!isMenuOpen ? (

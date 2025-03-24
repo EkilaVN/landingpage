@@ -9,7 +9,13 @@ const HireMe = () => {
       <MotionDecor />
       <div className="flex w-full flex-col gap-y-6 lg:flex-row">
         <div className="flex flex-1 items-center justify-center">
-          <Image src={HireImg.src} alt="Hire me" width={600} height={600} />
+          <Image
+            src={HireImg.src}
+            alt="Hire me"
+            width={600}
+            height={600}
+            className="h-full w-auto"
+          />
         </div>
         <div className="flex flex-1 flex-col justify-center space-y-6 text-center lg:pl-[60px] lg:text-start">
           <div className="flex flex-col space-y-3">

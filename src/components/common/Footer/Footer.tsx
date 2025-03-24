@@ -13,11 +13,13 @@ const Footer = () => (
         <Image
           src="https://marketifythemes.net/html/dizme/img/logo/logo.png"
           alt="Logo"
-          className="max-h-[80px] max-w-[150px]"
           width={150}
           height={80}
+          priority
+          className="h-auto w-auto"
         />
       </div>
+
       <div className="flex w-full flex-col items-center justify-center gap-y-16 text-center lg:flex-row lg:items-start lg:justify-between lg:gap-4 lg:text-start">
         <div className="flex flex-1 flex-col space-y-5">
           <p className="text-xl font-bold uppercase text-textColor">About</p>

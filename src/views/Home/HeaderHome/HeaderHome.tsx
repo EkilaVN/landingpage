@@ -77,7 +77,7 @@ const HeaderHome = () => (
       </div>
       <div className="flex flex-1 justify-center lg:justify-end">
         <div className="relative w-[65%] min-w-40">
-          <Image src={Avatar} alt="Avatar" className="w-full" />
+          <Image src={Avatar} alt="Avatar" className="w-full" priority />
         </div>
       </div>
     </div>

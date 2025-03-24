@@ -3,7 +3,6 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { motion } from "framer-motion";
-
 import { cn } from "@/lib/utils";
 
 interface GridPatternProps {
@@ -35,16 +34,21 @@ export function GridPattern({
   const id = useId();
   const containerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [squares, setSquares] = useState(() => generateSquares(numSquares));
+  const [isMounted, setIsMounted] = useState(false);
+  const [squares, setSquares] = useState<Array<{ id: number; pos: [number, number] }>>([]);
+
+  // Chỉ chạy trên client
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   function getPos() {
     return [
       Math.floor((Math.random() * dimensions.width) / width),
       Math.floor((Math.random() * dimensions.height) / height),
-    ];
+    ] as [number, number];
   }
 
-  // Adjust the generateSquares function to return objects with an id, x, and y
   function generateSquares(count: number) {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
@@ -52,29 +56,16 @@ export function GridPattern({
     }));
   }
 
-  // Function to update a single square's position
   const updateSquarePosition = (id: number) => {
     setSquares((currentSquares) =>
-      currentSquares.map((sq) =>
-        sq.id === id
-          ? {
-              ...sq,
-              pos: getPos(),
-            }
-          : sq
-      )
+      currentSquares.map((sq) => (sq.id === id ? { ...sq, pos: getPos() } : sq))
     );
   };
 
-  // Update squares to animate in
+  // Xử lý resize và sinh squares sau khi mount
   useEffect(() => {
-    if (dimensions.width && dimensions.height) {
-      setSquares(generateSquares(numSquares));
-    }
-  }, [dimensions, numSquares]);
+    if (!isMounted) return;
 
-  // Resize observer to update container dimensions
-  useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         setDimensions({
@@ -85,17 +76,19 @@ export function GridPattern({
     });
 
     const currentContainerRef = containerRef.current;
-
-    if (currentContainerRef) {
-      resizeObserver.observe(currentContainerRef);
-    }
+    if (currentContainerRef) resizeObserver.observe(currentContainerRef);
 
     return () => {
-      if (currentContainerRef) {
-        resizeObserver.unobserve(currentContainerRef);
-      }
+      if (currentContainerRef) resizeObserver.unobserve(currentContainerRef);
     };
-  }, [containerRef]);
+  }, [isMounted]);
+
+  // Cập nhật squares khi dimensions thay đổi
+  useEffect(() => {
+    if (isMounted && dimensions.width > 0 && dimensions.height > 0) {
+      setSquares(generateSquares(numSquares));
+    }
+  }, [dimensions, numSquares, isMounted]);
 
   return (
     <svg
@@ -113,29 +106,32 @@ export function GridPattern({
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill={`url(#${id})`} />
-      <svg x={x} y={y} className="overflow-visible">
-        {squares.map(({ pos: [x, y], id }, index) => (
-          <motion.rect
-            initial={{ opacity: 0 }}
-            animate={{ opacity: maxOpacity }}
-            transition={{
-              duration,
-              repeat: 1,
-              delay: index * 0.1,
-              repeatType: "reverse",
-              repeatDelay,
-            }}
-            onAnimationComplete={() => updateSquarePosition(id)}
-            key={`${x}-${y}-${index}`}
-            width={width - 1}
-            height={height - 1}
-            x={x * width + 1}
-            y={y * height + 1}
-            fill="currentColor"
-            strokeWidth="0"
-          />
-        ))}
-      </svg>
+
+      {isMounted && (
+        <svg x={x} y={y} className="overflow-visible">
+          {squares.map(({ pos: [xPos, yPos], id }, index) => (
+            <motion.rect
+              initial={{ opacity: 0 }}
+              animate={{ opacity: maxOpacity }}
+              transition={{
+                duration,
+                repeat: 1,
+                delay: index * 0.1,
+                repeatType: "reverse",
+                repeatDelay,
+              }}
+              onAnimationComplete={() => updateSquarePosition(id)}
+              key={`${xPos}-${yPos}-${id}`} // Sử dụng id thay vì index
+              width={width - 1}
+              height={height - 1}
+              x={xPos * width + 1}
+              y={yPos * height + 1}
+              fill="currentColor"
+              strokeWidth="0"
+            />
+          ))}
+        </svg>
+      )}
     </svg>
   );
 }

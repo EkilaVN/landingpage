@@ -57,7 +57,13 @@ const ContactMe = () => {
               <Image src={ContactUs} alt="ContactUs" className="w-[80%]" />
               <div className="flex w-[80%] flex-col gap-4 text-base">
                 <div className="flex gap-2">
-                  <Image src={Map} alt="" />
+                  <Image
+                    src={Map}
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="h-6 w-6 object-contain"
+                  />
                   <div className="flex flex-col">
                     <p className="text-base font-medium text-textColor">
                       1234 Street Name, City Name, United States
@@ -65,13 +71,25 @@ const ContactMe = () => {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Image src={Phone} alt="" />
+                  <Image
+                    src={Phone}
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="h-6 w-6 object-contain"
+                  />
                   <div className="flex flex-col">
                     <p className="text-base font-medium text-textColor">+84 81 4488 935</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Image src={Mail} alt="" />
+                  <Image
+                    src={Mail}
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="h-6 w-6 object-contain"
+                  />
                   <div className="flex flex-col">
                     <p className="text-base font-medium text-textColor">htvinh201@gmail.com</p>
                   </div>

@@ -43,6 +43,7 @@ const MyServices = () => (
                 width="1000"
                 className="h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl"
                 alt="thumbnail"
+                priority
               />
             </CardItem>
           </CardBody>
@@ -69,6 +70,7 @@ const MyServices = () => (
                 width="1000"
                 className="h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl"
                 alt="thumbnail"
+                priority
               />
             </CardItem>
           </CardBody>
@@ -95,6 +97,7 @@ const MyServices = () => (
                 width="1000"
                 className="h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl"
                 alt="thumbnail"
+                priority
               />
             </CardItem>
           </CardBody>
@@ -121,6 +124,7 @@ const MyServices = () => (
                 width="1000"
                 className="h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl"
                 alt="thumbnail"
+                priority
               />
             </CardItem>
           </CardBody>

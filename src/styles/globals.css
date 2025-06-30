@@ -20,27 +20,33 @@ html {
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
+  box-sizing: border-box;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --color-primary: #f76642;
+  --color-primary: #7c00ff;
+  --color-triangole: #00c8ff;
   --color-description: #2c2c2c;
   --color-footer: #dfe3eb;
   --color-background: #ffffff;
-  --color-card: #ffffff;
+  --color-card: #eff1fb;
   --color-text: #000000;
   --background-image: url("https://marketifythemes.net/html/dizme/img/slider/1.jpg");
+  --color-sub-bg: #f3f4f9;
 }
 
 .dark {
   --color-background: #0f0f0fc6;
   --color-text: #ffffff;
   --color-card: #4b4f5c;
+  /* --background-image: url("https://res.cloudinary.com/deizfnbwc/image/upload/v1745336072/DSC06808_oi64y8.jpg"); */
   --background-image: url("https://marketifythemes.net/html/dizme/img/slider/2.jpg");
   --color-description: #b9b5c9;
   --color-footer: #0d0d0e;
+  --color-sub-bg: #272728;
 }
 
 body {
@@ -194,4 +200,59 @@ body {
 
 .button:hover::before {
   --size: 400px;
+}
+
+
+.flash-animation-item {
+	position: relative;
+	overflow: hidden;
+}
+
+.flash-animation-item::after {
+	position: absolute;
+	content: "";
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transform: skewX(-20deg) translateX(-110%);
+	background-image: linear-gradient(100deg, rgba(1, 1, 1, 0) 30%, white);
+	animation: itemMenu 0.7s 0.1s forwards;
+	display: none;
+}
+
+.flash-animation-item:hover::after {
+	display: block;
+}
+
+@keyframes itemMenu {
+	to {
+		transform: skewX(-20deg) translateX(110%);
+	}
+}
+
+.perspective {
+  perspective: 1000px;
+}
+
+.flip-card {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-card-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1.5rem; /* rounded-3xl */
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.group:hover .flip-card {
+  transform: rotateY(180deg);
 }

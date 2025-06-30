@@ -19,6 +19,34 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "assets.aceternity.com",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "goldenowl.asia",
+      },
+      {
+        protocol: "https",
+        hostname: "d2dkqamqz2k831.cloudfront.net",
+      },
+      {
+        protocol: "https",
+        hostname: "lanit.com.vn",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn-icons-png.flaticon.com",
+      },
+      {
+        protocol: "https",
+        hostname: "admin.ekila.vn",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
     ],
   },
 };

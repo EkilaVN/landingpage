@@ -26,3 +26,20 @@ export const generateSearchParams = (
 
   return params.toString();
 };
+
+export function unescapeMarkdown(markdown: string): string {
+  let cleaned = markdown;
+
+  if (cleaned.startsWith('"') && cleaned.endsWith('"')) {
+    cleaned = cleaned.slice(1, -1);
+  }
+
+  cleaned = cleaned.replace(/\\n/g, "\n");
+  cleaned = cleaned.replace(/\\\\/g, "\\");
+  cleaned = cleaned
+    .split("\n")
+    .map((line) => line.replace(/^\s+/, ""))
+    .join("\n");
+
+  return cleaned;
+}

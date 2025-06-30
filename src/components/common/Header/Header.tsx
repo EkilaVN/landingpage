@@ -9,13 +9,25 @@ import { AlignJustify, X } from "lucide-react";
 import Link from "next/link";
 import Sun from "@/assets/svgs/Sun.svg";
 import Moon from "@/assets/svgs/moon.svg";
+import logo from "@/assets/images/logo/logo.png";
+import logo_complex from "@/assets/images/logo/logo_complex.png";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { PATHS } from "@/constants/route";
 
 export const menuItems = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Portfolio", path: "/portfolio" },
-  { label: "Blog", path: "/blog" },
-  { label: "Contact", path: "/contact" },
+  { label: "Trang chủ", path: PATHS.HOME },
+  {
+    label: "Dịch vụ",
+    submenu: [
+      { label: "Xây dựng website", path: PATHS.SERVICES.WEB_DEVELOPMENT },
+      { label: "Phát triển Ứng dụng điện thoại", path: PATHS.SERVICES.MOBILE_DEVELOPMENT },
+      { label: "Phát triển Zalo Mini App", path: PATHS.SERVICES.ZMA_DEVELOPMENT },
+      { label: "Marketing Agency", path: PATHS.SERVICES.MARKETING_AGENCY },
+      // { label: "UI/UX/Graphic Design", path: "/services/ui-ux-graphic-design" },
+    ],
+  },
+  { label: "Dự án", path: PATHS.PORTFOLIO },
+  // { label: "Blog", path: PATHS.BLOG },
 ];
 
 const Header = () => {
@@ -26,6 +38,11 @@ const Header = () => {
   const [bgColor, setBgColor] = useState("transparent");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+
+  const toggleSubmenu = (label: string) => {
+    setActiveSubmenu((prev) => (prev === label ? null : label));
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,11 +80,12 @@ const Header = () => {
     }
   };
 
-  const handleDownloadCV = () => {
-    const link = document.createElement("a");
-    link.href = "/CV_HTVinh_FullStack_Office.pdf";
-    link.download = "My_CV.pdf";
-    link.click();
+  const isParentActive = (item: (typeof menuItems)[number]): boolean => {
+    if (item.submenu) {
+      console.log(pathname);
+      return item.submenu.some((sub) => pathname === sub.path);
+    }
+    return pathname === item.path;
   };
 
   useMotionValueEvent(scrollY, "change", (latestY) => {
@@ -78,6 +96,23 @@ const Header = () => {
     }
   });
 
+  const mobileMenuVariants = {
+    hidden: { x: "100%", opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.4, ease: "easeOut" } },
+    exit: { x: "100%", opacity: 0, transition: { duration: 0.3, ease: "easeIn" } },
+  };
+
+  useEffect(() => {
+    const isPortfolioPage = pathname.includes(PATHS.PORTFOLIO);
+    const haveSlug = pathname.split("/").length > 2;
+    if (isPortfolioPage && haveSlug) {
+      setTheme("light");
+    } else {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) setTheme(savedTheme);
+    }
+  }, [pathname, setTheme]);
+
   return (
     <motion.div
       style={{
@@ -86,14 +121,22 @@ const Header = () => {
       }}
       className="fixed top-0 z-30 flex h-14 w-full justify-center px-4 shadow-sm lg:h-[70px]"
     >
-      <div className="flex w-full items-center justify-between sm:px-3 md:px-6 lg:max-w-[1170px] lg:px-10 2xl:max-w-[1420px]">
+      <div className="flex w-full items-center justify-between lg:max-w-[1170px] xl:px-10 2xl:max-w-[1420px]">
         <Image
-          src="https://marketifythemes.net/html/dizme/img/logo/logo.png"
+          src={theme === "light" ? logo : logo_complex}
           alt="Logo"
-          width={150}
-          height={80}
+          width={110}
+          height={36}
           priority
-          className="h-auto w-auto"
+          className="hidden md:block"
+        />
+        <Image
+          src={theme === "light" ? logo : logo_complex}
+          alt="Logo"
+          width={80}
+          height={30}
+          priority
+          className="md:hidden"
         />
 
         {!isMenuOpen ? (
@@ -105,21 +148,71 @@ const Header = () => {
         <AnimatePresence>
           {(isMenuOpen || !isMobile) && (
             <motion.ul
-              initial={isMobile ? { x: "100%" } : { x: 0 }}
-              animate={{ x: 0 }}
-              exit={isMobile ? { x: "100%" } : { x: 0 }}
+              variants={mobileMenuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
               className={`${
                 !isMobile ? "hidden" : "flex"
-              } absolute right-0 top-12 mt-[8px] w-full flex-col justify-center gap-4 overflow-hidden bg-white px-4 py-5 text-base font-semibold text-textColor dark:bg-[#2b2d33] sm:px-3 md:px-6 lg:static lg:mt-0 lg:flex lg:w-auto lg:flex-row lg:items-center lg:bg-transparent lg:py-0 lg:dark:bg-transparent`}
+              } absolute right-0 top-12 mt-[8px] w-full flex-col justify-center gap-7 bg-white px-4 py-5 text-base font-semibold text-textColor dark:bg-[#2b2d33] lg:static lg:mt-0 lg:flex lg:w-auto lg:flex-row lg:items-center lg:bg-transparent lg:py-0 lg:dark:bg-transparent xl:px-0`}
             >
               {menuItems.map((item) => (
-                <li key={item.path}>
-                  <Link
-                    href={item.path}
-                    className={`hover:text-textMain ${pathname === item.path ? "text-textMain" : ""}`}
-                  >
-                    {item.label}
-                  </Link>
+                <li key={item.label} className="group relative">
+                  {item.submenu ? (
+                    <div className="group relative">
+                      <button
+                        onClick={() => {
+                          if (isMobile) toggleSubmenu(item.label);
+                        }}
+                        className={`flex w-full items-center justify-between gap-1 py-2 ${
+                          isParentActive(item) ? "text-textMain dark:text-textTriangole" : ""
+                        } hover:text-textMain dark:hover:text-textTriangole`}
+                      >
+                        <span>{item.label}</span>
+                        <IoMdArrowDropdown
+                          className={`text-2xl transition-transform duration-300 ${
+                            activeSubmenu === item.label ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+
+                      <div
+                        className={`${
+                          isMobile
+                            ? activeSubmenu === item.label
+                              ? "block"
+                              : "hidden"
+                            : "absolute right-0 top-full z-20 hidden group-hover:block"
+                        }`}
+                      >
+                        <ul className="flex-col gap-2 rounded-md bg-white p-3 text-sm shadow-lg dark:bg-[#2b2d33] lg:min-w-[280px]">
+                          {item.submenu.map((sub) => (
+                            <li key={sub.path}>
+                              <Link
+                                href={sub.path}
+                                className={`block px-2 py-2 hover:text-textMain dark:hover:text-textTriangole ${
+                                  pathname === sub.path
+                                    ? "text-textMain dark:text-textTriangole"
+                                    : ""
+                                }`}
+                              >
+                                {sub.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.path}
+                      className={`hover:text-textMain dark:hover:text-textTriangole ${
+                        isParentActive(item) ? "text-textMain dark:text-textTriangole" : ""
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
 
@@ -136,11 +229,13 @@ const Header = () => {
                 </div>
               </li>
               <li>
-                <RippleButton
-                  title="Download CV"
-                  customClass="font-semibold p-5 text-base"
-                  onClick={handleDownloadCV}
-                />
+                <a
+                  href="https://www.facebook.com/ekila.vn"
+                  target="__blank"
+                  className="flex justify-center"
+                >
+                  <RippleButton title="Tư vấn ngay" customClass="font-semibold p-5 text-base" />
+                </a>
               </li>
             </motion.ul>
           )}

@@ -14,7 +14,7 @@ const MyServiceDecor = () => {
         variants={fadeRightAnimationVariants}
         initial="initial"
         whileInView="animate"
-        viewport={{ once: false }}
+        viewport={{ once: true }}
       />
       <motion.img
         src={Deco6.src}
@@ -23,7 +23,7 @@ const MyServiceDecor = () => {
         variants={fadeLeftAnimationVariants}
         initial="initial"
         whileInView="animate"
-        viewport={{ once: false }}
+        viewport={{ once: true }}
       />
     </>
   );

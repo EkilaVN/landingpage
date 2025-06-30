@@ -57,12 +57,16 @@ export default {
           5: "hsl(var(--chart-5))",
         },
 
+        colorPrimary: "var(--color-primary)",
+        colorTriangole: "var(--color-triangole)",
         textMain: "var(--color-primary)",
+        textTriangole: "var(--color-triangole)",
         textSecondary: "var(--color-description)",
         backgroundMain: "var(--color-background)",
         backgroundCard: "var(--color-card)",
         textColor: "var(--color-text)",
         backgroundFooter: "var(--color-footer)",
+        backgroundSub: "var(--color-sub-bg)",
       },
       keyframes: {
         ripple: {
@@ -72,6 +76,14 @@ export default {
         bounce: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
+        },
+        "slide-up": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-40px)" },
         },
         wobble: {
           from: {
@@ -107,6 +119,10 @@ export default {
         ripple: "ripple 0.5s linear forwards",
         bounce: "bounce 3s linear infinite",
         wobble: "wobble 0.8s ease-in-out",
+        "slide-up": "slide-up 0.5s ease-out",
+        "float-slow": "float 6s linear infinite",
+        "float-medium": "float 5s linear infinite",
+        "float-fast": "float 4s linear infinite",
       },
 
       backgroundImage: {
@@ -114,5 +130,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;

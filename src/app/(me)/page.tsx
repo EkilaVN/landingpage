@@ -1,6 +1,7 @@
 import SplashCursor from "@/components/ui/SplashCursor";
 import CommitInfo from "@/views/Home/CommitInfo/CommitInfo";
 import ContactMe from "@/views/Home/ContactMe/ContactMe";
+import CustomerSlider from "@/views/Home/CustomerSlider/CustomerSlider";
 import HeaderHome from "@/views/Home/HeaderHome/HeaderHome";
 import HighlightBlogs from "@/views/Home/HighlightBlogs/HighlightBlogs";
 import HireMe from "@/views/Home/HireMe/HireMe";
@@ -17,11 +18,12 @@ export default function Home() {
       <div className="relative flex w-full flex-col items-center justify-evenly px-5 md:px-7 lg:max-w-[1170px] lg:px-10 2xl:max-w-[1420px]">
         <CommitInfo />
         <HireMe />
-        <Portfolio />
+        {/* <Portfolio /> */}
         <MyServices />
         <HighlightBlogs />
+        <CustomerSlider />
         <Testimonials />
-        <SubscribeNewsletter />
+        {/* <SubscribeNewsletter /> */}
         <ContactMe />
       </div>
     </div>

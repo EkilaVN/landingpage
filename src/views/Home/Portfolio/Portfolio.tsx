@@ -16,7 +16,7 @@ const portfolioItems = [
   {
     id: 3,
     image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg",
-    type: "Achievements",
+    type: "Design",
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const portfolioItems = [
   },
 ];
 
-const tabs = ["All", "Web", "App", "Achievements", "Other"];
+const tabs = ["All", "Web", "App", "Design", "Other"];
 
 const Portfolio = () => {
   return (
@@ -43,9 +43,9 @@ const Portfolio = () => {
       <PortfolioDecor />
       <div className="z-10 my-20 flex w-full flex-col items-center">
         <TitleSection
-          title="Portfolio"
-          subtitle="My Amazing Works"
-          description="Most common methods for designing websites that work well on desktop is responsive and adaptive design"
+          title="Chất lượng - Hiệu quả"
+          subtitle="Dự án tiêu biểu"
+          description="Ekila Solutions vinh dự đồng hành cùng Quý khách hàng trong hành trình xây dựng giải pháp và phát triển bền vững"
           className="mb-8"
         />
         <PortfolioSectionList portfolioItems={portfolioItems} tabs={tabs} />

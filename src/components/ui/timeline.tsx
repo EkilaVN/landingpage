@@ -39,11 +39,12 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     <div className="relative w-full bg-white font-sans dark:bg-backgroundMain" ref={containerRef}>
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <h2 className="mb-5 text-3xl font-bold text-textColor lg:text-4xl">
-          Changelog from my journey
+          Xây dựng nhanh chóng - đơn giản - hiệu quả
         </h2>
         <p className="text-base text-textSecondary lg:text-lg">
-          I&apos;ve been working on Aceternity for the past 2 years. Here&apos;s a timeline of my
-          journey.
+          Chúng tôi cung cấp giải pháp phần mềm được thiết kế nhanh chóng, triển khai đơn giản và
+          đảm bảo hiệu quả, đáp ứng chính xác nhu cầu của khách hàng từ khâu tư vấn đến hỗ trợ sau
+          triển khai.
         </p>
       </div>
 
@@ -54,7 +55,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               <div className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full bg-radial-fade md:left-3">
                 <div className="h-4 w-4 rounded-full border border-neutral-300 bg-textMain p-2 dark:border-neutral-700" />
               </div>
-              <p className="hidden max-w-40 text-xl font-bold text-neutral-500 dark:text-neutral-500 md:block md:pl-14 md:text-2xl lg:text-3xl">
+              <p className="hidden max-w-36 text-lg font-bold text-neutral-500 dark:text-neutral-500 md:block md:pl-14 md:text-xl lg:text-2xl">
                 {item.title}
               </p>
             </div>

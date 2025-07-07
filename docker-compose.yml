@@ -4,7 +4,8 @@ services:
   landingpage:
     image: tduykhuong/landingpage:latest
     restart: always
-    env_file: .env
+    env_file:
+      - .env
     volumes:
       - ./public:/opt/static
     labels:

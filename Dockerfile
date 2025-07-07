@@ -9,7 +9,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install pnpm
-RUN npm install -g pnpm@8.15.4
+RUN npm install -g pnpm@10.12.4
 
 # Copy package.json and pnpm-lock.yaml
 COPY package.json pnpm-lock.yaml* ./
@@ -22,7 +22,7 @@ FROM base AS builder
 WORKDIR /app
 
 # Install pnpm
-RUN npm install -g pnpm@8.15.4
+RUN npm install -g pnpm@10.12.4
 
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules

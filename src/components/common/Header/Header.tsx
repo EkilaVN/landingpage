@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence, easeInOut } from "framer-motion";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useThemeStore } from "@/hooks/zustand/themeStore";
@@ -98,8 +98,8 @@ const Header = () => {
 
   const mobileMenuVariants = {
     hidden: { x: "100%", opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { duration: 0.4, ease: "easeOut" } },
-    exit: { x: "100%", opacity: 0, transition: { duration: 0.3, ease: "easeIn" } },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.4, ease: easeInOut } },
+    exit: { x: "100%", opacity: 0, transition: { duration: 0.3, ease: easeInOut } },
   };
 
   useEffect(() => {

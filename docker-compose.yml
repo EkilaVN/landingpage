@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  landingpage:
+    image: tduykhuong/landingpage:latest
+    restart: always
+    env_file: .env
+    volumes:
+      - ./public:/opt/static
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.services.landingpage-internal-service.loadbalancer.server.port=3000"
+      - "traefik.http.routers.landingpage-internal-service.rule=Host(`ekila.vn`)"
+      - "traefik.http.routers.landingpage-internal-service.entrypoints=websecure"

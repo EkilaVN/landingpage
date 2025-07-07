@@ -1,0 +1,59 @@
+version: 2.1
+
+jobs:
+  build-node:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Build & tag docker image
+          command: |
+            VERSION=$(cat version.rc)
+            TAG=$VERSION.$CIRCLE_BUILD_NUM
+            docker build -t $REGISTRY_USERNAME/$SERVICE_NAME:latest -t $REGISTRY_USERNAME/$SERVICE_NAME:$TAG --build-arg NODE_ENV=production .
+      - run:
+          name: Publish docker image to registry
+          command: |
+            VERSION=$(cat version.rc)
+            TAG=$VERSION.$CIRCLE_BUILD_NUM
+            echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USERNAME --password-stdin
+            docker push $REGISTRY_USERNAME/$SERVICE_NAME:$TAG
+            docker push $REGISTRY_USERNAME/$SERVICE_NAME:latest
+
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    environment:
+      SERVICE_PATH: ~/
+      DEPLOY_SCRIPT: ~/EkilaVN/gateway/deploy.sh
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - ${VPS_FINGERPRINT}
+      - run:
+          name: Deploy to cloud VPS
+          command: |
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "docker pull $REGISTRY_USERNAME/$SERVICE_NAME:latest"
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode init"
+            scp -P $VPS_PORT -o StrictHostKeyChecking=no -v docker-compose.yml $VPS_USERNAME@$VPS_HOST:$SERVICE_PATH$SERVICE_NAME/docker-compose.yml
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode deploy"
+
+workflows:
+  full-deploy:
+    jobs:
+      - build-node:
+          filters:
+            branches:
+              only: main
+      - deploy:
+          requires:
+            - build-node
+          filters:
+            branches:
+              only: main

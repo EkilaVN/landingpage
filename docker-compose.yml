@@ -11,5 +11,5 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
       - "traefik.http.services.landingpage-internal-service.loadbalancer.server.port=3000"
-      - "traefik.http.routers.landingpage-internal-service.rule=Host(`ekila.vn`)"
+      - "traefik.http.routers.landingpage-internal-service.rule=Host(`ekila.vn`) || Host(`www.ekila.vn`)"
       - "traefik.http.routers.landingpage-internal-service.entrypoints=websecure"

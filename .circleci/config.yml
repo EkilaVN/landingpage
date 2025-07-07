@@ -37,6 +37,15 @@ jobs:
           fingerprints:
             - ${VPS_FINGERPRINT}
       - run:
+          name: Create .env from CircleCI env vars
+          command: |
+            echo "NEXT_PUBLIC_AUTH_TOKEN=$NEXT_PUBLIC_AUTH_TOKEN" > .env
+            echo "NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL" >> .env
+      - run:
+        name: Copy .env to VPS
+        command: |
+          scp -P $VPS_PORT -o StrictHostKeyChecking=no -v .env $VPS_USERNAME@$VPS_HOST:$SERVICE_PATH$SERVICE_NAME/.env
+      - run:
           name: Deploy to cloud VPS
           command: |
             ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "docker pull $REGISTRY_USERNAME/$SERVICE_NAME:latest"

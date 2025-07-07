@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build-node:
     executor:
-      name: node/default
+      name: cimg/node:20.10
     steps:
       - checkout
       - attach_workspace:

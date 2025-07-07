@@ -2,8 +2,8 @@ version: 2.1
 
 jobs:
   build-node:
-    executor:
-      name: cimg/node:20.10
+    docker:
+      - image: cimg/node:20.10
     steps:
       - checkout
       - attach_workspace:

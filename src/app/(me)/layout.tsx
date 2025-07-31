@@ -3,6 +3,7 @@ import Footer from "@/components/common/Footer/Footer";
 import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
 import LoadingBarWrapper from "@/components/common/LoadingBar/LoadingBarWrapper";
 import RouteLoadingHandler from "@/components/common/LoadingBar/RouteLoadingHandler";
+import Analytics from "@/components/Analytics";
 
 export default function RootLayout({
   children,
@@ -17,6 +18,7 @@ export default function RootLayout({
         <RouteLoadingHandler />
         {children}
       </LoadingBarWrapper>
+      <Analytics />
       <Footer />
     </div>
   );

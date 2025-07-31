@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <head>
+      <body className={`${openSans.variable} relative min-h-screen antialiased`}>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-3HSXW3LWQ0"
           strategy="afterInteractive"
@@ -31,8 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-3HSXW3LWQ0');
           `}
         </Script>
-      </head>
-      <body className={`${openSans.variable} relative min-h-screen antialiased`}>
+
         <Providers>{children}</Providers>
       </body>
     </html>

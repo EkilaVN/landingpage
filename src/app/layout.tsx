@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import { Providers } from "./providers";
 import Script from "next/script";
+import Analytics from "@/components/Analytics";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -32,7 +33,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
 
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Analytics />
+        </Providers>
       </body>
     </html>
   );

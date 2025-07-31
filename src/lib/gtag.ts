@@ -1,11 +1,3 @@
-// lib/gtag.ts
-
-declare global {
-  interface Window {
-    gtag: (...args: any[]) => void;
-  }
-}
-
 export const GA_TRACKING_ID = "G-3HSXW3LWQ0";
 
 export const pageview = (url: string) => {

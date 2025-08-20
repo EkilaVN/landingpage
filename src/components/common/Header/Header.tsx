@@ -122,22 +122,24 @@ const Header = () => {
       className="fixed top-0 z-30 flex h-14 w-full justify-center px-4 shadow-sm lg:h-[70px]"
     >
       <div className="flex w-full items-center justify-between lg:max-w-[1170px] xl:px-10 2xl:max-w-[1420px]">
-        <Image
-          src={theme === "light" ? logo : logo_complex}
-          alt="Logo"
-          width={110}
-          height={36}
-          priority
-          className="hidden md:block"
-        />
-        <Image
-          src={theme === "light" ? logo : logo_complex}
-          alt="Logo"
-          width={80}
-          height={30}
-          priority
-          className="md:hidden"
-        />
+        <Link href={PATHS.HOME} className="flex items-center gap-2">
+          <Image
+            src={theme === "light" ? logo : logo_complex}
+            alt="Logo"
+            width={110}
+            height={36}
+            priority
+            className="hidden md:block"
+          />
+          <Image
+            src={theme === "light" ? logo : logo_complex}
+            alt="Logo"
+            width={80}
+            height={30}
+            priority
+            className="md:hidden"
+          />
+        </Link>
 
         {!isMenuOpen ? (
           <AlignJustify className="size-6 lg:hidden" onClick={() => setIsMenuOpen(true)} />

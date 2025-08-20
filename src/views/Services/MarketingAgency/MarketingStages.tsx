@@ -45,7 +45,7 @@ export default function MarketingStages() {
     <div className="relative my-12 flex w-full flex-col items-center px-4 md:my-24 xl:px-10">
       <TitleSection
         title="Bứt phá"
-        subtitle="Lộ trình Tiếp thị sô theo tiêu chuẩn tối ưu"
+        subtitle="Lộ trình Tiếp thị số theo tiêu chuẩn tối ưu"
         description="Mỗi chiến dịch Digital Marketing tại Ekila đều được cá nhân hóa theo mục tiêu và mô hình doanh nghiệp của bạn. Chúng tôi lắng nghe, đồng hành và xây dựng chiến lược phù hợp nhất để tạo ra hiệu quả tối đa. Bạn có thể tham khảo quy trình tổng quan dưới đây để hình dung cách Ekila giúp chiến dịch Digital của bạn bứt phá mạnh mẽ"
       />
       <div className="grid grid-cols-2 justify-center gap-6 pb-8 md:grid-cols-4">

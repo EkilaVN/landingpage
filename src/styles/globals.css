@@ -36,6 +36,8 @@ html {
   --color-text: #000000;
   --background-image: url("https://marketifythemes.net/html/dizme/img/slider/1.jpg");
   --color-sub-bg: #f3f4f9;
+
+  --color-banner-home: #ffffff;
 }
 
 .dark {
@@ -47,6 +49,8 @@ html {
   --color-description: #b9b5c9;
   --color-footer: #0d0d0e;
   --color-sub-bg: #272728;
+
+  --color-banner-home: #3e4555;
 }
 
 body {
@@ -255,4 +259,75 @@ body {
 
 .group:hover .flip-card {
   transform: rotateY(180deg);
+}
+
+@-webkit-keyframes verticalSlide {
+  to {
+    -webkit-transform: translate3d(0, -50%, 0);
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+@keyframes verticalSlide {
+  to {
+    -webkit-transform: translate3d(0, -50%, 0);
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+.animated-promo-wrapper .animated-promo img {
+  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  display: block;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.animated-promo-wrapper .animated-promo-tbone {
+  -webkit-animation: verticalSlide 115s linear infinite;
+  animation: verticalSlide 95s linear infinite;
+}
+
+.animated-promo-wrapper .animated-promo-tbtwo {
+  -webkit-animation: verticalSlide 110s linear infinite;
+  animation: verticalSlide 90s linear infinite;
+}
+
+.animated-promo-wrapper .animated-promo-tbthree {
+  -webkit-animation: verticalSlide 100s linear infinite;
+  animation: verticalSlide 85s linear infinite;
+}
+
+.animated-promo-wrapper .animated-promo-tbfour {
+  -webkit-animation: verticalSlide 110s linear infinite;
+  animation: verticalSlide 80s linear infinite;
+}
+
+.animated-promo-wrapper .animated-promo-tbfive {
+  -webkit-animation: verticalSlide 115s linear infinite;
+  animation: verticalSlide 75s linear infinite;
+}
+
+.animated-promo-wrapper::before {
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  left: 0;
+  bottom: 0;
+  content: "";
+  background-image: linear-gradient(to bottom, rgba(12, 12, 33, 0) 0%, var(--color-banner-home) 95%);
+  z-index: 1;
+  pointer-events: none;
+  display: none;
+}
+
+.animated-promo-wrapper::after {
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  left: 0;
+  top: 0;
+  content: "";
+  background-image: linear-gradient(to top, rgba(12, 12, 33, 0) 0%, var(--color-banner-home) 95%);
+  z-index: 1;
+  pointer-events: none;
 }

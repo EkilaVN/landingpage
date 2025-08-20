@@ -161,7 +161,7 @@ const data = [
         </p>
         <div className="grid grid-cols-2 gap-4">
           <Image
-            src="https://res.cloudinary.com/deizfnbwc/image/upload/v1746162366/ekila_meeting_lxbsof.png"
+            src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755711599/customer_analystic_l6apwk.avif"
             alt="startup template"
             width={500}
             height={500}
@@ -230,7 +230,7 @@ const data = [
         </p>
         <div className="grid grid-cols-2 gap-4">
           <Image
-            src="https://res.cloudinary.com/deizfnbwc/image/upload/v1746185179/dev_sxjbzn.jpg"
+            src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755711599/it_build_mxzhlt.avif"
             alt="hero template"
             width={500}
             height={500}

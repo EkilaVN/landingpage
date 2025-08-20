@@ -47,7 +47,7 @@ const SERVICES = [
 ];
 
 const MyServices = () => (
-  <div className="relative flex w-full justify-center md:w-[100vw]">
+  <div className="relative flex w-full justify-center md:w-[100vw]" id="my-service">
     <div className="">
       <MyServiceDecor />
       <ContactMeDecor />

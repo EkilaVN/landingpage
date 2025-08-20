@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark scroll-smooth">
       <body className={`${openSans.variable} relative min-h-screen antialiased`}>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-3HSXW3LWQ0"

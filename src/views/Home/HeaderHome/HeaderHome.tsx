@@ -100,7 +100,7 @@ const HeaderHome = () => (
       </div> */}
     </div>
 
-    <div className="-z-2 absolute bottom-0 left-0 top-0 w-[40%] xl:w-1/4 hidden md:block">
+    <div className="-z-2 absolute bottom-0 left-0 top-0 hidden w-[40%] md:block xl:w-1/4">
       <div className="animated-promo-wrapper relative h-full overflow-hidden opacity-50">
         <div className="animated-promo-loop -my-5 mx-0 flex items-center justify-center gap-5">
           <div className="animated-promo animated-promo-tbone">
@@ -155,7 +155,7 @@ const HeaderHome = () => (
       </div>
     </div>
 
-    <div className="-z-2 absolute bottom-0 right-0 top-0 w-[40%] xl:w-1/4 hidden md:block">
+    <div className="-z-2 absolute bottom-0 right-0 top-0 hidden w-[40%] md:block xl:w-1/4">
       <div className="animated-promo-wrapper relative h-full overflow-hidden opacity-50">
         <div className="animated-promo-loop -my-5 mx-0 flex items-center justify-center gap-5">
           <div className="animated-promo animated-promo-tbone">

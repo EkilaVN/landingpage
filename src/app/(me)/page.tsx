@@ -13,7 +13,7 @@ import Testimonials from "@/views/Home/Testimonials/Testimonials";
 export default function Home() {
   return (
     <div className="flex w-full flex-col items-center justify-center">
-      {/* <SplashCursor /> */}
+      <SplashCursor />
       <HeaderHome />
       <div className="relative flex w-full flex-col items-center justify-evenly px-5 md:px-7 lg:max-w-[1170px] lg:px-10 2xl:max-w-[1420px]">
         <CommitInfo />

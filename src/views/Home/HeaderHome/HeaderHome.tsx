@@ -112,7 +112,7 @@ const HeaderHome = () => (
               priority
             />
             <Image
-              src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755447395/banner-03_wc1k6t.png"
+              src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755774030/banner-04_snjpqo.png"
               alt="Avatar"
               width={100}
               height={1500}
@@ -121,14 +121,14 @@ const HeaderHome = () => (
           </div>
           <div className="animated-promo animated-promo-tbtwo">
             <Image
-              src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755447395/banner-03_wc1k6t.png"
+              src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755774310/banner_8_angqnc.png"
               alt="Avatar"
               width={100}
               height={1500}
               priority
             />
             <Image
-              src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755447395/banner-03_wc1k6t.png"
+              src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755774314/banner_7_awicqm.png"
               alt="Avatar"
               width={100}
               height={1500}
@@ -137,14 +137,14 @@ const HeaderHome = () => (
           </div>
           <div className="animated-promo animated-promo-tbthree">
             <Image
-              src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755447395/banner-03_wc1k6t.png"
+              src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755774308/banner_10_dlalmb.png"
               alt="Avatar"
               width={100}
               height={1500}
               priority
             />
             <Image
-              src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755447395/banner-03_wc1k6t.png"
+              src="https://res.cloudinary.com/deizfnbwc/image/upload/v1755774311/banner_9_etcegy.png"
               alt="Avatar"
               width={100}
               height={1500}

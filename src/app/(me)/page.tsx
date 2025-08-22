@@ -1,4 +1,5 @@
 import SplashCursor from "@/components/ui/SplashCursor";
+import ZaloPopup from "@/components/ZaloPopup";
 import CommitInfo from "@/views/Home/CommitInfo/CommitInfo";
 import ContactMe from "@/views/Home/ContactMe/ContactMe";
 import CustomerSlider from "@/views/Home/CustomerSlider/CustomerSlider";
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <SplashCursor />
+      <ZaloPopup delay={5000} zaloOAUrl="https://zalo.me/2637985617420627751" />
       <HeaderHome />
       <div className="relative flex w-full flex-col items-center justify-evenly px-5 md:px-7 lg:max-w-[1170px] lg:px-10 2xl:max-w-[1420px]">
         <CommitInfo />

@@ -17,8 +17,7 @@ const ZaloPopup: React.FC<ZaloPopupProps> = ({
 
   useEffect(() => {
     // Check if popup was already shown in this session
-    // const popupShown = sessionStorage.getItem('zalo-popup-shown');
-    const popupShown = false;
+    const popupShown = sessionStorage.getItem("zalo-popup-shown");
 
     if (!popupShown) {
       const timer = setTimeout(() => {

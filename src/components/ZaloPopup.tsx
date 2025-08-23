@@ -91,7 +91,7 @@ const ZaloPopup: React.FC<ZaloPopupProps> = ({
           <div className="bottom-8 left-20 flex flex-col gap-3 p-3 sm:flex-row xl:absolute xl:w-[40%] xl:p-0">
             <button
               onClick={handleContactClick}
-              className="flex flex-1 items-center justify-center rounded-lg bg-pink-500 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-blue-600 lg:py-4 lg:text-base"
+              className="flex flex-1 items-center justify-center rounded-lg bg-pink-500 px-6 py-3 text-sm font-semibold text-white shadow transition-colors duration-200 hover:bg-blue-600 lg:py-4 lg:text-base"
             >
               <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.54 0 3-.35 4.31-.99L22 22l-1.01-5.69C21.65 15 22 13.54 22 12c0-5.52-4.48-10-10-10z" />
@@ -101,7 +101,7 @@ const ZaloPopup: React.FC<ZaloPopupProps> = ({
 
             <button
               onClick={handleClose}
-              className="flex-1 rounded-lg bg-gray-200 px-6 py-3 text-sm font-semibold text-gray-700 transition-colors duration-200 hover:bg-gray-300 lg:py-4 lg:text-base"
+              className="flex-1 rounded-lg bg-gray-200 px-6 py-3 text-sm font-semibold text-gray-700 shadow transition-colors duration-200 hover:bg-gray-300 lg:py-4 lg:text-base"
             >
               Để sau
             </button>
@@ -109,8 +109,8 @@ const ZaloPopup: React.FC<ZaloPopupProps> = ({
         </div>
 
         {/* Decorative Elements */}
-        <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-blue-100 opacity-50"></div>
-        <div className="absolute -bottom-2 -left-2 h-6 w-6 rounded-full bg-blue-200 opacity-30"></div>
+        <div className="absolute -left-5 -top-5 h-14 w-14 rounded-full bg-blue-100 opacity-50"></div>
+        <div className="absolute -bottom-3 -right-5 h-14 w-14 rounded-full bg-blue-200 opacity-30"></div>
       </div>
     </>
   );

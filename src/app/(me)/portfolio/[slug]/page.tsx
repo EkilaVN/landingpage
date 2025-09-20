@@ -33,7 +33,7 @@ const PortfolioDetail = () => {
   return (
     <div className="mt-16 w-full px-4 md:mt-20 lg:mt-32 lg:max-w-[1170px] 2xl:max-w-[1420px]">
       {data ? (
-        <div className="prose max-w-none">
+        <div className="prose mb-12 max-w-none">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{data}</ReactMarkdown>
         </div>
       ) : (

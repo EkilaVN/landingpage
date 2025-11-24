@@ -99,12 +99,14 @@ const ZaloPopup: React.FC<ZaloPopupProps> = ({
               Liên hệ tư vấn
             </button>
 
-            <button
-              onClick={handleClose}
+            <a
+              href="https://drive.google.com/file/d/1RlsvH1T-POdIipJe1D0ydaMPkaMDqdZY/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex-1 rounded-lg bg-gray-200 px-6 py-2 text-sm font-semibold text-gray-700 shadow transition-colors duration-200 hover:bg-gray-300 lg:py-4 lg:text-base"
             >
-              Để sau
-            </button>
+              Xem Chi tiết
+            </a>
           </div>
         </div>
 

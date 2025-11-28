@@ -27,7 +27,7 @@ export const menuItems = [
     ],
   },
   { label: "Dự án", path: PATHS.PORTFOLIO },
-  // { label: "Blog", path: PATHS.BLOG },
+  { label: "Blog", path: PATHS.BLOG },
 ];
 
 const Header = () => {

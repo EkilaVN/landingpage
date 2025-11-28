@@ -1,36 +1,32 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useArticleTypes } from "@/hooks/useArticleTypes";
 
-const categories = [
-  { id: "all", label: "Tất cả" },
-  { id: "web", label: "Website" },
-  { id: "mobile", label: "Mobile App" },
-  { id: "zma", label: "Zalo Mini App" },
-  { id: "customSoftware", label: "Phát triển phần mềm tùy chỉnh" },
-  { id: "design", label: "Design/Thiết kế" },
-  { id: "marketing", label: "Marketing" },
-  { id: "news", label: "Tin tức & Sự kiện" },
-];
+interface BlogCategoryProps {
+  selectedCategory: string;
+  onCategoryChange: (category: string) => void;
+}
 
-const BlogCategory: React.FC = () => {
-  const [selected, setSelected] = useState<string>("all");
+const BlogCategory: React.FC<BlogCategoryProps> = ({ 
+  selectedCategory, 
+  onCategoryChange 
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0, top: 0, height: 0 });
 
+  // Fetch article types from API
+  const { categories, loading, error } = useArticleTypes();
+
   const handleClick = (id: string) => {
-    setSelected(id);
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    onCategoryChange(id);
   };
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    const activeBtn = container.querySelector<HTMLButtonElement>(`button[data-id="${selected}"]`);
+    const activeBtn = container.querySelector<HTMLButtonElement>(`button[data-id="${selectedCategory}"]`);
 
     if (activeBtn) {
       const { offsetLeft, offsetWidth, offsetHeight, offsetTop } = activeBtn;
@@ -41,7 +37,26 @@ const BlogCategory: React.FC = () => {
         height: offsetHeight,
       });
     }
-  }, [selected]);
+  }, [selectedCategory, loading, categories]);
+
+  // Show loading skeleton while fetching data
+  if (loading) {
+    return (
+      <div className="relative mb-10 mt-4 flex w-full flex-row gap-4 overflow-x-auto overflow-y-hidden border-b-2 p-1 md:mx-0 md:mt-6 lg:mb-16">
+        {[...Array(6)].map((_, index) => (
+          <div
+            key={index}
+            className="h-10 w-24 animate-pulse rounded bg-gray-200 dark:bg-gray-700"
+          />
+        ))}
+      </div>
+    );
+  }
+
+  // Show error message if API fails (will fall back to default categories)
+  if (error) {
+    console.warn("Failed to load article types:", error);
+  }
 
   return (
     <div
@@ -60,7 +75,7 @@ const BlogCategory: React.FC = () => {
       />
 
       {categories.map(({ id, label }) => {
-        const isActive = selected === id;
+        const isActive = selectedCategory === id;
         return (
           <button
             key={id}

@@ -1,9 +1,18 @@
+"use client";
+
+import { useState } from "react";
 import GradientBar from "@/components/common/GradientBar/GradientBar";
 import BlogCategory from "@/views/Blog/BlogCategory/BlogCategory";
 import TitlePage from "@/components/common/TitlePage";
 import BlogList from "@/views/Blog/BlogList/BlogList";
 
 const Blog = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <div className="mx-auto mt-16 flex h-auto w-full flex-col md:mt-20 lg:max-w-[1170px] xl:mt-32 2xl:max-w-[1420px]">
       <GradientBar />
@@ -13,9 +22,12 @@ const Blog = () => {
       />
       <div className="flex w-full flex-col items-center justify-center">
         <div className="w-full px-4 xl:px-10">
-          <BlogCategory />
+          <BlogCategory 
+            selectedCategory={selectedCategory}
+            onCategoryChange={handleCategoryChange}
+          />
         </div>
-        <BlogList />
+        <BlogList selectedCategory={selectedCategory} />
       </div>
     </div>
   );

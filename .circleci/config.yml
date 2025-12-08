@@ -1,64 +1,40 @@
+setup: true
 version: 2.1
 
-jobs:
-  build-node:
-    docker:
-      - image: cimg/node:20.10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-          name: Build & tag docker image
-          command: |
-            VERSION=$(cat version.rc)
-            TAG=$VERSION.$CIRCLE_BUILD_NUM
-            docker build \
-              --build-arg NODE_ENV=production \
-              --build-arg NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL \
-              --build-arg NEXT_PUBLIC_AUTH_TOKEN=$NEXT_PUBLIC_AUTH_TOKEN \
-              -t $REGISTRY_USERNAME/$SERVICE_NAME:latest \
-              -t $REGISTRY_USERNAME/$SERVICE_NAME:$TAG .
-      - run:
-          name: Publish docker image to registry
-          command: |
-            VERSION=$(cat version.rc)
-            TAG=$VERSION.$CIRCLE_BUILD_NUM
-            echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USERNAME --password-stdin
-            docker push $REGISTRY_USERNAME/$SERVICE_NAME:$TAG
-            docker push $REGISTRY_USERNAME/$SERVICE_NAME:latest
-
-  deploy:
-    docker:
-      - image: cimg/base:stable
-    environment:
-      SERVICE_PATH: ~/
-      DEPLOY_SCRIPT: ~/EkilaVN/gateway/deploy.sh
-    steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprints:
-            - ${VPS_FINGERPRINT}
-      - run:
-          name: Deploy to cloud VPS
-          command: |
-            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "docker pull $REGISTRY_USERNAME/$SERVICE_NAME:latest"
-            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode init"
-            scp -P $VPS_PORT -o StrictHostKeyChecking=no -v docker-compose.yml $VPS_USERNAME@$VPS_HOST:$SERVICE_PATH$SERVICE_NAME/docker-compose.yml
-            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode deploy"
+orbs:
+  continuation: circleci/continuation@0.2.0
 
 workflows:
-  full-deploy:
+  setup:
     jobs:
-      - build-node:
-          filters:
-            branches:
-              only: main
-      - deploy:
-          requires:
-            - build-node
-          filters:
-            branches:
-              only: main
+      - continuation/continue:
+          configuration_path: '.circleci/main.yml'
+          parameters: /home/circleci/params.json
+          pre-steps:
+            - checkout:
+                fetch-depth: 2
+            - run:
+                name: Skip if no changes in cms/
+                command: |
+                  IS_BUILD_AND_DEPLOY_CMS=false
+
+                  if git diff --name-only "$CIRCLE_SHA1" "$CIRCLE_SHA1~1" | grep '^cms/' >/dev/null; then
+                    if [[ "${CIRCLE_BRANCH}" =~ ^(develop|main|master|release.*)$ ]]; then
+                      IS_BUILD_AND_DEPLOY_CMS=true
+                    fi
+                  fi
+
+                  echo '{ "is_build_and_deploy_cms": '"$IS_BUILD_AND_DEPLOY_CMS"' }' >> /home/circleci/params.json
+
+            - run:
+                name: Skip if no changes in web/
+                command: |
+                  IS_BUILD_AND_DEPLOY_WEB=false
+
+                  if git diff --name-only "$CIRCLE_SHA1" "$CIRCLE_SHA1~1" | grep '^web/' >/dev/null; then
+                    if [[ "${CIRCLE_BRANCH}" =~ ^(develop|main|master|release.*)$ ]]; then
+                      IS_BUILD_AND_DEPLOY_WEB=true
+                    fi
+                  fi
+
+                  echo ', "is_build_and_deploy_web": '"$IS_BUILD_AND_DEPLOY_WEB"' }' >> /home/circleci/params.json

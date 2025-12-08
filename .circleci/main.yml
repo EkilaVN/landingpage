@@ -1,0 +1,151 @@
+version: 2.1
+
+parameters:
+  is_build_and_deploy_web:
+    type: boolean
+    default: false
+  is_build_and_deploy_cms:
+    type: boolean
+    default: false
+
+orbs:
+  node: circleci/node@7.1
+
+jobs:
+  build-web:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Build & tag docker image
+          command: |
+            cd web
+            SERVICE_NAME=landingpage
+            VERSION=$(cat version.rc)
+            TAG=$VERSION.$CIRCLE_BUILD_NUM
+            docker build \
+              --build-arg NODE_ENV=production \
+              --build-arg NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL \
+              --build-arg NEXT_PUBLIC_AUTH_TOKEN=$NEXT_PUBLIC_AUTH_TOKEN \
+              -t $REGISTRY_USERNAME/$SERVICE_NAME:latest \
+              -t $REGISTRY_USERNAME/$SERVICE_NAME:$TAG .
+      - run:
+          name: Publish docker image to registry
+          command: |
+            cd web
+            SERVICE_NAME=landingpage
+            VERSION=$(cat version.rc)
+            TAG=$VERSION.$CIRCLE_BUILD_NUM
+            echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USERNAME --password-stdin
+            docker push $REGISTRY_USERNAME/$SERVICE_NAME:$TAG
+            docker push $REGISTRY_USERNAME/$SERVICE_NAME:latest
+
+  deploy-web:
+    docker:
+      - image: cimg/base:stable
+    environment:
+      SERVICE_PATH: ~/
+      DEPLOY_SCRIPT: ~/EkilaVN/gateway/deploy.sh
+      SERVICE_NAME: landingpage
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - ${VPS_FINGERPRINT}
+      - run:
+          name: Deploy to cloud VPS
+          command: |
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "docker pull $REGISTRY_USERNAME/$SERVICE_NAME:latest"
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode init"
+            scp -P $VPS_PORT -o StrictHostKeyChecking=no -v docker-compose.yml $VPS_USERNAME@$VPS_HOST:$SERVICE_PATH$SERVICE_NAME/docker-compose.yml
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode deploy"
+
+  build-cms:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Build & tag docker image
+          command: |
+            cd cms
+            SERVICE_NAME=ekila-cms
+            VERSION=$(cat version.rc)
+            TAG=$VERSION.$CIRCLE_BUILD_NUM
+            docker build -t $REGISTRY_USERNAME/$SERVICE_NAME:latest -t $REGISTRY_USERNAME/$SERVICE_NAME:$TAG --build-arg NODE_ENV=production .
+      - run:
+          name: Publish docker image to registry
+          command: |
+            cd cms
+            SERVICE_NAME=ekila-cms
+            VERSION=$(cat version.rc)
+            TAG=$VERSION.$CIRCLE_BUILD_NUM
+            echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USERNAME --password-stdin
+            docker push $REGISTRY_USERNAME/$SERVICE_NAME:$TAG
+            docker push $REGISTRY_USERNAME/$SERVICE_NAME:latest
+
+  deploy-cms:
+    docker:
+      - image: cimg/base:stable
+    environment:
+      SERVICE_PATH: ~/
+      DEPLOY_SCRIPT: ~/EkilaVN/gateway/deploy.sh
+      SERVICE_NAME: ekila-cms
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - ${VPS_FINGERPRINT}
+      - run:
+          name: Deploy to cloud VPS
+          command: |
+            cd cms
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "docker pull $REGISTRY_USERNAME/$SERVICE_NAME:latest"
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode init"
+            scp -P $VPS_PORT -o StrictHostKeyChecking=no -v docker-compose.prod.yml $VPS_USERNAME@$VPS_HOST:$SERVICE_PATH$SERVICE_NAME/docker-compose.yml
+            scp -P $VPS_PORT -o StrictHostKeyChecking=no -v .env.vault $VPS_USERNAME@$VPS_HOST:$SERVICE_PATH$SERVICE_NAME
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "echo \"DOTENV_ME=${DOTENV_ME}\" > $SERVICE_PATH$SERVICE_NAME/.env.me"
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "
+              cd $SERVICE_PATH$SERVICE_NAME &&
+              sudo rm -rf /usr/local/lib/node_modules/dotenv-vault &&
+              npm install -g dotenv-vault@latest --force &&
+              DOTENV_VAULT=$SERVICE_PATH$SERVICE_NAME/.env.vault dotenv-vault pull production .env
+            "
+            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode deploy"
+
+workflows:
+  full-deploy:
+    when: << pipeline.parameters.is_build_and_deploy_web >>
+    jobs:
+      - build-web:
+          filters:
+            branches:
+              only: main
+      - deploy-web:
+          requires:
+            - build-web
+          filters:
+            branches:
+              only: main
+
+    when: << pipeline.parameters.is_build_and_deploy_cms >>
+    jobs:
+      - build-cms:
+          filters:
+            branches:
+              only: main
+      - deploy-cms:
+          requires:
+            - build-cms
+          filters:
+            branches:
+              only: main

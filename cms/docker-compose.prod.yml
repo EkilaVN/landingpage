@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  ekila-cms:
+    image: tduykhuong/ekila-cms:latest
+    restart: always
+    env_file: .env
+    volumes:
+      - ./public:/opt/static
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.services.ekila-internal-service.loadbalancer.server.port=1337"
+      - "traefik.http.routers.ekila-internal-service.rule=Host(`admin.ekila.vn`)"
+      - "traefik.http.routers.ekila-internal-service.entrypoints=websecure"

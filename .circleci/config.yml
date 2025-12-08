@@ -14,27 +14,20 @@ workflows:
             - checkout:
                 fetch-depth: 2
             - run:
-                name: Skip if no changes in cms/
+                name: Generate params.json
                 command: |
                   IS_BUILD_AND_DEPLOY_CMS=false
-
-                  if git diff --name-only "$CIRCLE_SHA1" "$CIRCLE_SHA1~1" | grep '^cms/' >/dev/null; then
-                    if [[ "${CIRCLE_BRANCH}" =~ ^(develop|main|master|release.*)$ ]]; then
-                      IS_BUILD_AND_DEPLOY_CMS=true
-                    fi
-                  fi
-
-                  echo '{ "is_build_and_deploy_cms": '"$IS_BUILD_AND_DEPLOY_CMS"' }' >> /home/circleci/params.json
-
-            - run:
-                name: Skip if no changes in web/
-                command: |
                   IS_BUILD_AND_DEPLOY_WEB=false
 
-                  if git diff --name-only "$CIRCLE_SHA1" "$CIRCLE_SHA1~1" | grep '^web/' >/dev/null; then
-                    if [[ "${CIRCLE_BRANCH}" =~ ^(develop|main|master|release.*)$ ]]; then
-                      IS_BUILD_AND_DEPLOY_WEB=true
-                    fi
+                  if git diff --name-only "$CIRCLE_SHA1" "$CIRCLE_SHA1~1" | grep '^cms/' >/dev/null; then
+                    [[ "${CIRCLE_BRANCH}" =~ ^(develop|main|master|release.*)$ ]] && IS_BUILD_AND_DEPLOY_CMS=true
                   fi
 
-                  echo ', "is_build_and_deploy_web": '"$IS_BUILD_AND_DEPLOY_WEB"' }' >> /home/circleci/params.json
+                  if git diff --name-only "$CIRCLE_SHA1" "$CIRCLE_SHA1~1" | grep '^web/' >/dev/null; then
+                    [[ "${CIRCLE_BRANCH}" =~ ^(develop|main|master|release.*)$ ]] && IS_BUILD_AND_DEPLOY_WEB=true
+                  fi
+
+                  echo "{
+                    \"is_build_and_deploy_cms\": $IS_BUILD_AND_DEPLOY_CMS,
+                    \"is_build_and_deploy_web\": $IS_BUILD_AND_DEPLOY_WEB
+                  }" > /home/circleci/params.json

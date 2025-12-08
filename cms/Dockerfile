@@ -17,7 +17,6 @@ ENV PATH=/opt/node_modules/.bin:$PATH
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 
-
 COPY . .
 RUN chown -R node:node /opt/app
 USER node

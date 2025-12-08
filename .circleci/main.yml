@@ -122,8 +122,9 @@ jobs:
             "
             ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode deploy"
 
+
 workflows:
-  full-deploy:
+  deploy-web:
     when: << pipeline.parameters.is_build_and_deploy_web >>
     jobs:
       - build-web:
@@ -137,6 +138,7 @@ workflows:
             branches:
               only: main
 
+  deploy-cms:
     when: << pipeline.parameters.is_build_and_deploy_cms >>
     jobs:
       - build-cms:
@@ -149,3 +151,4 @@ workflows:
           filters:
             branches:
               only: main
+

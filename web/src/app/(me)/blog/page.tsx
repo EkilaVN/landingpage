@@ -22,7 +22,7 @@ const Blog = () => {
       />
       <div className="flex w-full flex-col items-center justify-center">
         <div className="w-full px-4 xl:px-10">
-          <BlogCategory 
+          <BlogCategory
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
           />

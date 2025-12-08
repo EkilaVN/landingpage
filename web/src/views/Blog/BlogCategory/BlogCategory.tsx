@@ -8,9 +8,9 @@ interface BlogCategoryProps {
   onCategoryChange: (category: string) => void;
 }
 
-const BlogCategory: React.FC<BlogCategoryProps> = ({ 
-  selectedCategory, 
-  onCategoryChange 
+const BlogCategory: React.FC<BlogCategoryProps> = ({
+  selectedCategory,
+  onCategoryChange
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0, top: 0, height: 0 });

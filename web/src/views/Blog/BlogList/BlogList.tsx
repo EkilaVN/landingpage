@@ -104,8 +104,8 @@ const BlogList: React.FC<BlogListProps> = ({ selectedCategory = "all" }) => {
             Chưa có bài viết nào
           </h3>
           <p className="mt-2 text-gray-500 dark:text-gray-500">
-            {selectedCategory === "all" 
-              ? "Hãy quay lại sau để xem những bài viết mới nhất." 
+            {selectedCategory === "all"
+              ? "Hãy quay lại sau để xem những bài viết mới nhất."
               : "Không có bài viết nào trong danh mục này."}
           </p>
         </div>
@@ -147,7 +147,7 @@ const BlogList: React.FC<BlogListProps> = ({ selectedCategory = "all" }) => {
         <div className="flex w-full items-center justify-between">
           {/* Pagination Info */}
           <div className="text-sm text-gray-600 dark:text-gray-400">
-            Hiển thị {((currentPage - 1) * pageSize) + 1} - {Math.min(currentPage * pageSize, totalItems)} 
+            Hiển thị {((currentPage - 1) * pageSize) + 1} - {Math.min(currentPage * pageSize, totalItems)}
             trong tổng {totalItems} bài viết
           </div>
 
@@ -165,11 +165,11 @@ const BlogList: React.FC<BlogListProps> = ({ selectedCategory = "all" }) => {
             {/* Page Numbers */}
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
               // Show first page, last page, current page, and pages around current page
-              const shouldShow = 
-                page === 1 || 
-                page === totalPages || 
+              const shouldShow =
+                page === 1 ||
+                page === totalPages ||
                 (page >= currentPage - 1 && page <= currentPage + 1);
-              
+
               if (!shouldShow) {
                 // Show ellipsis
                 if (page === currentPage - 2 && currentPage > 3) {

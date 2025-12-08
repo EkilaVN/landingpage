@@ -351,6 +351,26 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get("pagination[page]") || "1");
     const pageSize = parseInt(searchParams.get("pagination[pageSize]") || "6");
     const articleTypeId = searchParams.get("filters[article_type][id][$eq]");
+    const slug = searchParams.get("filters[slug][$eq]");
+
+    // Filter by slug if specified (for single article fetch)
+    if (slug) {
+      const article = mockArticles.find((article) => article.slug === slug);
+      if (!article) {
+        return NextResponse.json({ error: "Article not found" }, { status: 404 });
+      }
+      return NextResponse.json({
+        data: [article], // Return as array to match the expected structure
+        meta: {
+          pagination: {
+            page: 1,
+            pageSize: 1,
+            pageCount: 1,
+            total: 1,
+          },
+        },
+      });
+    }
 
     // Filter by article type if specified
     let filteredArticles = mockArticles;

@@ -1,4 +1,4 @@
-FROM node:20-alpine3.18
+FROM node:20.17-alpine3.18
 
 ARG NODE_ENV
 ENV NODE_ENV=$NODE_ENV

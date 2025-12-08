@@ -20,6 +20,7 @@ WORKDIR /opt/app
 COPY . .
 RUN chown -R node:node /opt/app
 USER node
+RUN npm uninstall @types/minimatch || true
 RUN yarn build
 
 RUN rm -rf src

@@ -112,14 +112,6 @@ jobs:
             ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "docker pull $REGISTRY_USERNAME/$SERVICE_NAME:latest"
             ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode init"
             scp -P $VPS_PORT -o StrictHostKeyChecking=no -v docker-compose.prod.yml $VPS_USERNAME@$VPS_HOST:$SERVICE_PATH$SERVICE_NAME/docker-compose.yml
-            scp -P $VPS_PORT -o StrictHostKeyChecking=no -v .env.vault $VPS_USERNAME@$VPS_HOST:$SERVICE_PATH$SERVICE_NAME
-            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "echo \"DOTENV_ME=${DOTENV_ME}\" > $SERVICE_PATH$SERVICE_NAME/.env.me"
-            ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "
-              cd $SERVICE_PATH$SERVICE_NAME &&
-              sudo rm -rf /usr/local/lib/node_modules/dotenv-vault &&
-              npm install -g dotenv-vault@latest --force &&
-              DOTENV_VAULT=$SERVICE_PATH$SERVICE_NAME/.env.vault dotenv-vault pull production .env
-            "
             ssh -o StrictHostKeyChecking=no -v $VPS_USERNAME@$VPS_HOST "chmod +x $DEPLOY_SCRIPT && $DEPLOY_SCRIPT --service $SERVICE_NAME --service-path $SERVICE_PATH --mode deploy"
 
 

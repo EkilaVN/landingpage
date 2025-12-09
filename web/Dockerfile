@@ -9,7 +9,6 @@ RUN npm install -g pnpm@10.12.4
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm install --frozen-lockfile
 
-
 # ============ BUILDER STAGE =============
 FROM base AS builder
 WORKDIR /app

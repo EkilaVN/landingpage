@@ -6,7 +6,7 @@ services:
     restart: always
     env_file: .env
     volumes:
-      - ./public/uploads:/app/public/uploads
+      - ./public/uploads:/opt/app/public/uploads
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"

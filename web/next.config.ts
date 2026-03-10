@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
 
+  async rewrites() {
+    return [
+      {
+        source: "/uploads/:path*",
+        destination: "https://admin.ekila.vn/uploads/:path*",
+      },
+    ];
+  },
+
   images: {
     remotePatterns: [
       {

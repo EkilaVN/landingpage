@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_industries",
+  "info": {
+    "singularName": "project-industry",
+    "pluralName": "project-industries",
+    "displayName": "Project Industry",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project",
+      "mappedBy": "project_industry"
+    },
+    "position": {
+      "type": "integer",
+      "default": 0
+    },
+    "icon": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

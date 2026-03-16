@@ -38,6 +38,12 @@
     "slug": {
       "type": "string",
       "unique": true
+    },
+    "project_industry": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project-industry.project-industry",
+      "inversedBy": "projects"
     }
   }
 }

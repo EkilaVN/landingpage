@@ -472,6 +472,68 @@ export interface ApiContactFormContactForm extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCustomerCustomer extends Struct.CollectionTypeSchema {
+  collectionName: 'customers';
+  info: {
+    displayName: 'Customer';
+    pluralName: 'customers';
+    singularName: 'customer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::customer.customer'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProjectIndustryProjectIndustry
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'project_industries';
+  info: {
+    description: '';
+    displayName: 'Project Industry';
+    pluralName: 'project-industries';
+    singularName: 'project-industry';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project-industry.project-industry'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    position: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjectTypeProjectType extends Struct.CollectionTypeSchema {
   collectionName: 'project_types';
   info: {
@@ -523,6 +585,10 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       'api::project.project'
     > &
       Schema.Attribute.Private;
+    project_industry: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::project-industry.project-industry'
+    >;
     project_type: Schema.Attribute.Relation<
       'manyToOne',
       'api::project-type.project-type'
@@ -1050,6 +1116,8 @@ declare module '@strapi/strapi' {
       'api::article-type.article-type': ApiArticleTypeArticleType;
       'api::article.article': ApiArticleArticle;
       'api::contact-form.contact-form': ApiContactFormContactForm;
+      'api::customer.customer': ApiCustomerCustomer;
+      'api::project-industry.project-industry': ApiProjectIndustryProjectIndustry;
       'api::project-type.project-type': ApiProjectTypeProjectType;
       'api::project.project': ApiProjectProject;
       'plugin::content-releases.release': PluginContentReleasesRelease;

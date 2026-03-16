@@ -1,4 +1,4 @@
-FROM node:20.17-alpine
+FROM node:20-alpine3.18
 
 ARG NODE_ENV
 ENV NODE_ENV=$NODE_ENV
@@ -10,18 +10,16 @@ RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev l
 
 WORKDIR /opt/
 COPY package.json yarn.lock ./
-RUN yarn add node-gyp pm2
+RUN yarn global add node-gyp pm2
 RUN npm install
 ENV PATH=/opt/node_modules/.bin:$PATH
 
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 
-
 COPY . .
 RUN chown -R node:node /opt/app
 USER node
-RUN npm uninstall @types/minimatch || true
 RUN yarn build
 
 RUN rm -rf src

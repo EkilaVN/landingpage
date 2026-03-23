@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "accounts",
+  "info": {
+    "singularName": "account",
+    "pluralName": "accounts",
+    "displayName": "Account"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "zalo_user_id": {
+      "type": "string"
+    },
+    "zalo_user_img": {
+      "type": "string"
+    },
+    "role": {
+      "type": "enumeration",
+      "enum": [
+        "user",
+        "employee",
+        "manager"
+      ]
+    },
+    "ekila_task_trackings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ekila-task-tracking.ekila-task-tracking",
+      "mappedBy": "account"
+    }
+  }
+}

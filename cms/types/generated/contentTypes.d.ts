@@ -369,6 +369,42 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAccountAccount extends Struct.CollectionTypeSchema {
+  collectionName: 'accounts';
+  info: {
+    displayName: 'Account';
+    pluralName: 'accounts';
+    singularName: 'account';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    ekila_task_trackings: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ekila-task-tracking.ekila-task-tracking'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::account.account'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    phone: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.Enumeration<['user', 'employee', 'manager']>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    zalo_user_id: Schema.Attribute.String;
+    zalo_user_img: Schema.Attribute.String;
+  };
+}
+
 export interface ApiArticleTypeArticleType extends Struct.CollectionTypeSchema {
   collectionName: 'article_types';
   info: {
@@ -517,6 +553,10 @@ export interface ApiEkilaProjectManagementEkilaProjectManagement
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    ekila_task_trackings: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ekila-task-tracking.ekila-task-tracking'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -525,6 +565,42 @@ export interface ApiEkilaProjectManagementEkilaProjectManagement
       Schema.Attribute.Private;
     project_name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEkilaTaskTrackingEkilaTaskTracking
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'ekila_task_trackings';
+  info: {
+    displayName: '[Ekila] Task Tracking';
+    pluralName: 'ekila-task-trackings';
+    singularName: 'ekila-task-tracking';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    account: Schema.Attribute.Relation<'manyToOne', 'api::account.account'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.DateTime;
+    ekila_project_management: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::ekila-project-management.ekila-project-management'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ekila-task-tracking.ekila-task-tracking'
+    > &
+      Schema.Attribute.Private;
+    note: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    total_hours: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1143,11 +1219,13 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::account.account': ApiAccountAccount;
       'api::article-type.article-type': ApiArticleTypeArticleType;
       'api::article.article': ApiArticleArticle;
       'api::contact-form.contact-form': ApiContactFormContactForm;
       'api::customer.customer': ApiCustomerCustomer;
       'api::ekila-project-management.ekila-project-management': ApiEkilaProjectManagementEkilaProjectManagement;
+      'api::ekila-task-tracking.ekila-task-tracking': ApiEkilaTaskTrackingEkilaTaskTracking;
       'api::project-industry.project-industry': ApiProjectIndustryProjectIndustry;
       'api::project-type.project-type': ApiProjectTypeProjectType;
       'api::project.project': ApiProjectProject;

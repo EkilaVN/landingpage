@@ -16,6 +16,12 @@
     },
     "contract_renewal_date": {
       "type": "date"
+    },
+    "ekila_task_trackings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ekila-task-tracking.ekila-task-tracking",
+      "mappedBy": "ekila_project_management"
     }
   }
 }

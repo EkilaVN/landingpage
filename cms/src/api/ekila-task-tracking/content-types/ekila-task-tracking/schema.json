@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ekila_task_trackings",
+  "info": {
+    "singularName": "ekila-task-tracking",
+    "pluralName": "ekila-task-trackings",
+    "displayName": "[Ekila] Task Tracking"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "account": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::account.account",
+      "inversedBy": "ekila_task_trackings"
+    },
+    "ekila_project_management": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ekila-project-management.ekila-project-management",
+      "inversedBy": "ekila_task_trackings"
+    },
+    "note": {
+      "type": "string"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "total_hours": {
+      "type": "decimal"
+    }
+  }
+}

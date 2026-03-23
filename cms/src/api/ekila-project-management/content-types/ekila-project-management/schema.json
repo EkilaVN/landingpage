@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ekila_project_managements",
+  "info": {
+    "singularName": "ekila-project-management",
+    "pluralName": "ekila-project-managements",
+    "displayName": "[Ekila] Project Management"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "project_name": {
+      "type": "string",
+      "required": true
+    },
+    "contract_renewal_date": {
+      "type": "date"
+    }
+  }
+}

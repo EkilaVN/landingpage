@@ -501,6 +501,36 @@ export interface ApiCustomerCustomer extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiEkilaProjectManagementEkilaProjectManagement
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'ekila_project_managements';
+  info: {
+    displayName: '[Ekila] Project Management';
+    pluralName: 'ekila-project-managements';
+    singularName: 'ekila-project-management';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    contract_renewal_date: Schema.Attribute.Date;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ekila-project-management.ekila-project-management'
+    > &
+      Schema.Attribute.Private;
+    project_name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjectIndustryProjectIndustry
   extends Struct.CollectionTypeSchema {
   collectionName: 'project_industries';
@@ -1117,6 +1147,7 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::contact-form.contact-form': ApiContactFormContactForm;
       'api::customer.customer': ApiCustomerCustomer;
+      'api::ekila-project-management.ekila-project-management': ApiEkilaProjectManagementEkilaProjectManagement;
       'api::project-industry.project-industry': ApiProjectIndustryProjectIndustry;
       'api::project-type.project-type': ApiProjectTypeProjectType;
       'api::project.project': ApiProjectProject;

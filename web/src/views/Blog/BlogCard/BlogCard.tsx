@@ -36,7 +36,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
           height={400}
           loading="lazy"
           decoding="async"
-          className="aspect-[11/6] h-auto w-full rounded-lg object-cover md:max-h-none lg:h-full"
+          className="aspect-[8/5] h-auto w-full rounded-lg object-cover md:max-h-none lg:h-full"
         />
       </div>
 
@@ -45,10 +45,10 @@ const BlogCard: React.FC<BlogCardProps> = ({
         <span className="inline-block rounded-lg bg-gradient-to-r from-purple-600 to-blue-400 p-0.5 text-sm font-medium text-gray-500 dark:text-white">
           <span className="inline-block rounded-[6px] bg-backgroundMain px-2 py-1">{category}</span>
         </span>
-        <h3 className="mt-4 text-2xl font-bold text-gray-700 dark:text-white md:text-3xl">
+        <h3 className="mt-4 line-clamp-3 min-h-[6rem] text-2xl font-bold text-gray-700 dark:text-white md:min-h-[6.75rem] md:text-3xl">
           {title}
         </h3>
-        <p className="mt-6 text-sm text-textSecondary md:text-base">{description}</p>
+        <p className="mt-6 line-clamp-5 min-h-[6.25rem] text-sm text-textSecondary md:min-h-[7.5rem] md:text-base">{description}</p>
         <p className="mt-3 text-sm text-textSecondary md:text-base">
           {publishedAt} &nbsp;&nbsp;&nbsp;&nbsp;Khoảng {readDuration} phút đọc
         </p>

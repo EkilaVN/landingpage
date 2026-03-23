@@ -103,14 +103,14 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const isPortfolioPage = pathname.includes(PATHS.PORTFOLIO);
-    const haveSlug = pathname.split("/").length > 2;
-    if (isPortfolioPage && haveSlug) {
-      setTheme("light");
-    } else {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme) setTheme(savedTheme);
-    }
+    // const isPortfolioPage = pathname.includes(PATHS.PORTFOLIO);
+    // const haveSlug = pathname.split("/").length > 2;
+    // if (isPortfolioPage && haveSlug) {
+    //   setTheme("light");
+    // } else {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) setTheme(savedTheme);
+    // }
   }, [pathname, setTheme]);
 
   return (

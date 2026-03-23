@@ -7,6 +7,7 @@ import FacebookIcon from "@/assets/svgs/facebook.svg";
 import Instagram from "@/assets/svgs/instagram.svg";
 import Linkedin from "@/assets/svgs/linkedin.svg";
 import Github from "@/assets/svgs/github.svg";
+import Zalo from "@/assets/svgs/zalo.svg";
 import logo from "@/assets/images/logo/logo.png";
 import logo_complex from "@/assets/images/logo/logo_complex.png";
 
@@ -33,7 +34,7 @@ const Footer = () => {
             <p className="mb-2 text-base font-medium text-textSecondary">
               Công ty TNHH Ekila Solutions
             </p>
-            {/* <p className="text-base font-medium text-textSecondary">GPDKKD số 1102095450</p> */}
+            <p className="text-base font-medium text-textSecondary">GPDKKD số 1102095450</p>
             <div className="mt-8 flex items-center justify-center gap-4 lg:justify-start">
               <a
                 href="https://www.facebook.com/ekila.vn"
@@ -68,19 +69,19 @@ const Footer = () => {
                   className="invert-0 hover:animate-wobble dark:invert"
                 />
               </a>
-              {/* <a
-                href="https://www.facebook.com/tanvinh.huynh.9999/"
+              <a
+                href="https://zalo.me/2637985617420627751"
                 target="_blank"
                 className="text-textColor transition-colors duration-300 hover:text-textMain"
               >
-                <Image src={Github} alt="" className="invert-0 hover:animate-wobble dark:invert" />
-              </a> */}
+                <Image src={Zalo} alt="" className="invert-0 hover:animate-wobble dark:invert max-w-6" />
+              </a>
             </div>
           </div>
           <div className="flex flex-1 flex-col space-y-5">
             <p className="text-xl font-bold uppercase text-textColor">Liên hệ</p>
             <p className="text-base font-medium text-textSecondary">
-              <span>Địa chỉ: </span>1041/62 Trần Xuân Soạn, phường Tân Hưng, Quận 7, TPHCM
+              <span>Địa chỉ: </span>1041/62 Trần Xuân Soạn, phường Tân Hưng, TPHCM
             </p>
             <p className="text-base font-medium text-textSecondary before:content-[\\\\e910]">
               <span>Điện thoại: </span>0824 704 789
@@ -92,7 +93,7 @@ const Footer = () => {
           <div className="flex w-full flex-1 flex-col space-y-5">
             <p className="text-xl font-bold uppercase text-textColor">Trụ sở chính</p>
             <p className="text-base font-medium text-textSecondary">
-              <span>Địa chỉ: </span>Số 942, ấp Lộc Tiền, xã Mỹ Lộc, huyện Cần Giuộc, tỉnh Long An
+              <span>Địa chỉ: </span>Số 942, ấp Lộc Tiền, xã Mỹ Lộc, tỉnh Tây Ninh (Long An cũ)
             </p>
             <p className="text-base font-medium text-textSecondary before:content-[\\\\e910]">
               <span>Điện thoại: </span>05 8383 8376
